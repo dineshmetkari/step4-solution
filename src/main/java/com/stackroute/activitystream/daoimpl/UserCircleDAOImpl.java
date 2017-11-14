@@ -16,8 +16,14 @@ import com.stackroute.activitystream.model.UserCircle;
 
 @Repository("userCircleDAO")
 @Transactional
-public class UserCircleDAOImpl implements UserCircleDAO{
-	
+public class UserCircleDAOImpl implements UserCircleDAO {
+
+	@Autowired
+	private UserDAO userDAO;
+
+	@Autowired
+	private CircleDAO circleDAO;
+
 	@Autowired
 	private SessionFactory sessionFactory;
 
@@ -28,7 +34,7 @@ public class UserCircleDAOImpl implements UserCircleDAO{
 	private Session getCurrentSession() {
 		return sessionFactory.getCurrentSession();
 	}
-	
+
 	public boolean addUser(String username, String circleName) {
 
 		UserCircle userCircle = new UserCircle();
@@ -36,9 +42,14 @@ public class UserCircleDAOImpl implements UserCircleDAO{
 		userCircle.setUsername(username);
 
 		try {
-			
-			getCurrentSession().save(userCircle);
-			
+			if (userDAO.get(username) != null && circleDAO.get(circleName) != null) {
+				if(get(username,circleName)==null) {
+				getCurrentSession().save(userCircle);
+				}
+			}
+			else
+				return false;
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -58,16 +69,16 @@ public class UserCircleDAOImpl implements UserCircleDAO{
 
 		return true;
 	}
-	
+
 	public UserCircle get(String username, String circleName) {
 		return (UserCircle) getCurrentSession().createQuery("from UserCircle where username= ? and circleName= ?")
 				.setString(0, username).setString(1, circleName).uniqueResult();
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public List<String> getMyCircles(String username) {
-		return getCurrentSession().createQuery("select circleName from UserCircle where username= ?").setString(0, username)
-				.list();
+		return getCurrentSession().createQuery("select circleName from UserCircle where username= ?")
+				.setString(0, username).list();
 	}
 
 }

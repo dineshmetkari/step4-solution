@@ -15,6 +15,8 @@ public interface MessageDAO {
 		public boolean sendMessageToCircle(String circleName,Message message);
 		 
 		public boolean sendMessageToUser(String username,Message message);
+		
+		public boolean removeMessage(Message message);
 		 	
 		public boolean sendMessageToCircles(List<String> circleNames,Message message);
 		

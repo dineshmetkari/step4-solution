@@ -83,7 +83,7 @@ public class MessageDAOImpl implements MessageDAO {
 			message.setCircleName(circleName);
 			
 
-			if (circleDAO.get(circleName) == null || !(userCircleDAO.getMyCircles(message.getSenderId()).contains(circleName))) {
+			if (circleDAO.get(circleName) == null || !(userCircleDAO.getMyCircles(message.getSenderName()).contains(circleName))) {
 				return false;
 			}
 			else {
@@ -102,7 +102,7 @@ public class MessageDAOImpl implements MessageDAO {
 		try {
 			message.setPostedDate();
 			message.setReceiverId(username);
-			if((userDAO.get(message.getSenderId())!=null) && (userDAO.get(message.getReceiverId())!=null)) {
+			if((userDAO.get(message.getSenderName())!=null) && (userDAO.get(message.getReceiverId())!=null)) {
 				getCurrentSession().save(message);
 				return true;
 			}
@@ -173,6 +173,19 @@ public class MessageDAOImpl implements MessageDAO {
 	public UserTag getUserTag(String username, String tag) {
 		return (UserTag) getCurrentSession().createQuery("from UserTag where username= ? and tag= ?")
 				.setString(0, username).setString(1, tag).uniqueResult();
+	}
+
+	@Override
+	public boolean removeMessage(Message message) {
+		
+		try {
+		getCurrentSession().delete(message);
+		getCurrentSession().flush();
+		return true;
+		}catch(Exception e) {
+			return false;
+		}
+		
 	}
 
 }

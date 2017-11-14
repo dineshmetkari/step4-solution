@@ -19,6 +19,20 @@ public class UserCircle {
 	private String username;
 	private String circleName;
 	
+	public UserCircle(String username, String circleName) {
+		super();
+		this.username = username;
+		this.circleName = circleName;
+	}
+	
+	
+	
+	public UserCircle() {
+		
+	}
+
+
+
 	public int getUserCircleId() {
 		return userCircleId;
 	}

@@ -37,7 +37,7 @@ public class MessageController {
 		if(loggedInUserName==null) {
 			return new ResponseEntity<Message>(HttpStatus.UNAUTHORIZED);
 		}
-		message.setSenderId(loggedInUserName);
+		message.setSenderName(loggedInUserName);
 		Boolean sendStatus = messageDAO.sendMessageToCircle(circleName, message);
 		if (sendStatus) {
 			return new ResponseEntity<Message>(HttpStatus.OK);
@@ -54,7 +54,7 @@ public class MessageController {
 		if(loggedInUserName==null) {
 			return new ResponseEntity<Message>(HttpStatus.UNAUTHORIZED);
 		}
-		message.setSenderId(loggedInUserName);
+		message.setSenderName(loggedInUserName);
 		Boolean sendStatus = messageDAO.sendMessageToUser(receiverId, message);
 		if (sendStatus) {
 			return new ResponseEntity<Message>(HttpStatus.OK);

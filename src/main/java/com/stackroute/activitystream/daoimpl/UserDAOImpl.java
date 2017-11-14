@@ -32,6 +32,7 @@ public class UserDAOImpl implements UserDAO{
 	public boolean save(User user) {
 		try {
 			getCurrentSession().save(user);
+			getCurrentSession().flush();
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -43,6 +44,7 @@ public class UserDAOImpl implements UserDAO{
 	public boolean update(User user) {
 		try {
 			getCurrentSession().update(user);
+			getCurrentSession().flush();
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -54,6 +56,7 @@ public class UserDAOImpl implements UserDAO{
 	public boolean delete(User user) {
 		try {
 			getCurrentSession().delete(user);
+			getCurrentSession().flush();
 			return true;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

@@ -50,7 +50,7 @@ public class UserAuthController {
 	@PutMapping("/logout")
 	public ResponseEntity<User> logout(HttpSession session) {
 
-		String username = (String) session.getAttribute("loggedInUserId");
+		String username = (String) session.getAttribute("loggedInUserName");
 		if (username != null) {
 
 			System.out.println("logout-->username: " + username);

@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name="circle")
 public class Circle {
@@ -15,6 +18,21 @@ public class Circle {
 	private String creatorId;
 	private Timestamp createdDate;
 	
+	
+	
+	public Circle(String circleName, String creatorId, Timestamp createdDate) {
+		super();
+		this.circleName = circleName;
+		this.creatorId = creatorId;
+		this.createdDate = createdDate;
+	}
+	
+	
+	public Circle() {
+		
+	}
+
+
 	public String getCircleName() {
 		return circleName;
 	}

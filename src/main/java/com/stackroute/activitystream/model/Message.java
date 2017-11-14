@@ -8,13 +8,16 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name="message")
 public class Message {
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private int messageId;
-	private String senderId;
+	private String senderName;
 	private String receiverId;
 	private String circleName;
 	private Timestamp postedDate;
@@ -24,6 +27,26 @@ public class Message {
 	
 	
 	
+	public Message(String senderName, String receiverId, String circleName, Timestamp postedDate, String streamType,
+			String message, String tag) {
+		super();
+		this.senderName = senderName;
+		this.receiverId = receiverId;
+		this.circleName = circleName;
+		this.postedDate = postedDate;
+		this.streamType = streamType;
+		this.message = message;
+		this.tag = tag;
+	}
+	
+	
+	
+	public Message() {
+		
+	}
+
+
+
 	public String getTag() {
 		return tag;
 	}
@@ -42,11 +65,11 @@ public class Message {
 	public void setMessageId(int messageId) {
 		this.messageId = messageId;
 	}
-	public String getSenderId() {
-		return senderId;
+	public String getSenderName() {
+		return senderName;
 	}
-	public void setSenderId(String senderId) {
-		this.senderId = senderId;
+	public void setSenderName(String senderName) {
+		this.senderName = senderName;
 	}
 	public String getReceiverId() {
 		return receiverId;

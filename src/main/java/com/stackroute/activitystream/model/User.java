@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.springframework.stereotype.Component;
+
+@Component
 @Entity
 @Table(name="user")
 public class User {
@@ -13,6 +16,15 @@ public class User {
 	private String name;
 	private String password;
 	
+	public User() {
+		
+	}
+	
+	public User(String username, String name, String password) {
+		this.username = username;
+		this.name = name;
+		this.password = password;
+	}
 	public String getUsername() {
 		return username;
 	}
